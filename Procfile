@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath postimagetony postimagetony.wsgi
+web: gunicorn --pythonpath postimage postimage.wsgi
