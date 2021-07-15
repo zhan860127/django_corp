@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath postimage postimage.wsgi
+web: gunicorn --pythonpath potrip potrip.wsgi
