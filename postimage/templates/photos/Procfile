@@ -1,1 +1,2 @@
 web: gunicorn urexpenses.wsgi
+web gunicorn app_run:app
