@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+
+<div >
+<form action="">
+{% csrf_token %}
+</form>
+<div >
+<input id="avatarSlect" type="file" >
+
+{% load static %}
+<img id="avatarPreview" src="{% static "/images/tools.png" %}" title="點選更換圖片" >
+</div>
+</div>
+</body>
+{% load static %}
+<script src="{% static "/jquery-3.6.0.min.js"%}"></script>
+<script>
+    console.log("222")
+
+$(function () {
+bindAvatar();
+});
+function bindAvatar() {
+if(window.URL.createObjectURL){
+bindAvatar3();
+}else if(window.FileReader){
+bindAvatar2();
+}else {
+bindAvatar1();
+}
+}
+/*Ajax上傳至後臺並返回圖片的url*/
+function bindAvatar1() {
+$("#avatarSlect").change(function () {
+console.log("123");
+var csrf = $("input[name='csrfmiddlewaretoken']").val();
+var formData=new FormData();
+formData.append("csrfmiddlewaretoken",csrf);
+formData.append('avatar', $("#avatarSlect")[0].files[0]);  /*獲取上傳的圖片物件*/
+$.ajax({
+url: '/upload_avatar/',
+type: 'POST',
+data: formData,
+contentType: false,
+processData: false,
+success: function (args) {
+console.log(args);  /*伺服器端的圖片地址*/
+$("#avatarPreview").attr('src','/'+args);
+$("#avatar").val('/'+args);  /*將服務端的圖片url賦值給form表單的隱藏input標籤*/
+}
+})
+})
+}
+/*window.FileReader本地預覽*/
+function bindAvatar2() {
+console.log("2");
+$("#avatarSlect").change(function () {
+var obj=$("#avatarSlect")[0].files[0];
+var fr=new FileReader();
+fr.onload=function () {
+$("#avatarPreview").attr('src',this.result);
+console.log(this.result);
+$("#avatar").val(this.result);
+};
+fr.readAsDataURL(obj);
+})
+}
+/*window.URL.createObjectURL本地預覽*/
+function bindAvatar3() {
+console.log(3);
+$("#avatarSlect").change(function () {
+var obj=$("#avatarSlect")[0].files[0];
+var wuc=window.URL.createObjectURL(obj);
+$("#avatarPreview").attr('src',wuc);
+$("#avatar").val(wuc);
+})
+}
+</script>
+</html>
