@@ -26,7 +26,6 @@ SECRET_KEY = 'django-insecure-7=91z1++7r-_y1b93%j-@ju*n!pi&czqs#fjiqoxo@qhwo_q4b
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'tonyzhantest.herokuapp.com/'
 ]
 
 
@@ -157,8 +156,4 @@ TEMPLATES = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEBUG = True
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    # another directory ...
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
