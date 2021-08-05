@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-7=91z1++7r-_y1b93%j-@ju*n!pi&czqs#fjiqoxo@qhwo_q4b
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'urexpenses.herokuapp.com/'
+    'postimagetony.herokuapp.com/'
 
 ]
 
