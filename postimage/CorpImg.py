@@ -100,6 +100,8 @@ class Crop(Wicket):
 
     def choose_img(self,img1):
         # 选择图片的Frame
+        print("self.win.winfo_screenwidth()",self.win.winfo_screenwidth())
+        print("self.win.winfo_screenwidth()",self.win.winfo_screenheight())
 
         img_frame = tkinter.Frame(self.win,bg="red")
  ##       img_frame.grid(column=0, row=0)
@@ -119,6 +121,7 @@ class Crop(Wicket):
         
         
         canvas_frame = tkinter.Frame(self.win)
+        print("canvas_frame",canvas_frame.winfo_width)
         screen_width, screen_height = self.get_screen()
         zoom = 8 / 9
         canvas_width = int(screen_width * zoom)
@@ -239,8 +242,8 @@ class Crop(Wicket):
         print('加载图片')
         
         print(self.img_canvas)
-        canvas_width = 1280
-        canvas_height = 480
+        canvas_width = self.win.winfo_screenwidth()*0.95
+        canvas_height = self.win.winfo_screenheight()*0.95
         print(canvas_width,canvas_height)
         imageuse = Image.open(image['image'])
         
