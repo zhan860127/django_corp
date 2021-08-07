@@ -2,24 +2,11 @@ from django.shortcuts import render,redirect
 from .forms import UploadModelForm
 from .models import Photo
 from django.http.response import HttpResponse
-from django.http import StreamingHttpResponse
-from django.utils import timezone
-from django.core.files import File  # you need this somewhere
 from django.http import FileResponse  
 import os
-from django.http import HttpResponse, Http404, StreamingHttpResponse, FileResponse
+from django.http import HttpResponse, Http404, FileResponse
 from .CorpImg import *
 import os
-import time
-import tkinter
-from tkinter import messagebox
-from tkinter.filedialog import askopenfilename
-from PIL import Image
-from PIL import ImageTk
-from .Wicket import Wicket
-from postimage import CorpImg
-from django.core.files.images import ImageFile
-
 
 
 def index(request):

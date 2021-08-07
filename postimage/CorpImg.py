@@ -2,7 +2,6 @@
 import os
 import time
 import tkinter
-from tkinter import messagebox
 from tkinter.filedialog import askopenfilename
 
 from PIL import Image
@@ -47,56 +46,6 @@ class Crop(Wicket):
     @staticmethod
     def get_now():
         return time.strftime('%Y%m%d%H%M%S', time.localtime())
-
-    def get_img_path(self):
-        print('选择图片路径')
-        if self.sole_rectangle is not None:
-            self.img_canvas.delete(self.sole_rectangle)  # 删除前一个矩形
-        img_path = askopenfilename()
-        print('图片路径:{}'.format(img_path))
-        self.img_path = os.path.abspath(img_path)
-        self.img_entry.delete(0, tkinter.END)
-        self.img_entry.insert(tkinter.END, img_path)
-        self.load_img()
-
-    def resize_img(self, image_path, max_width, max_height):
-        image_path = os.path.abspath(image_path)
-        ret_path = image_path
-        suffix = os.path.splitext(image_path)[1]
-        print("suffix=",suffix)
-        now = self.get_now()
-        save_name = now + suffix
-        save_path = os.path.join(self.provisional_folder, save_name)
-        open_image = Image.open(image_path)
-        img_width, img_height = open_image.size
-        if img_width > max_width or img_height > max_height:
-            flag = messagebox.askyesno('缩放', '图片尺寸过大,无法完整显示,是否自动缩放')
-            if flag is True:
-                re_img = open_image.resize((max_width, max_height), Image.ANTIALIAS)
-                print("re_img=",re_img)
-
-                re_img.save(save_path)
-                ret_path = save_path
-                print('自动缩放图片完成,保存于:{}'.format(ret_path))
-
-                
-        return ret_path
-
-    def load_img(self, ):
-        print('加载图片')
-        global image
-        global img
-        canvas_width = self.img_canvas.winfo_width()
-        canvas_height = self.img_canvas.winfo_height()
-        self.img_path = self.resize_img(self.img_path, canvas_width, canvas_height)
-        image = Image.open(self.img_path)
-        img = ImageTk.PhotoImage(image)
-
-        if self.sole_img is not None:
-            self.img_canvas.delete(self.sole_img)  # 删除前一张图片
-            print('已清除前一张图片')
-
-        self.sole_img = self.img_canvas.create_image(0, 0, anchor='nw', image=img)
 
     def choose_img(self,img1):
         # 选择图片的Frame

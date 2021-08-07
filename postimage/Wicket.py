@@ -8,6 +8,7 @@ class Wicket:
     def create_window(self):
         if self.win is None:
             tk = tkinter.Tk()
+            tk.wm_attributes('-topmost',1)
             self.win = tk
         else:
             print('已经存在窗口,无需再次创建')
